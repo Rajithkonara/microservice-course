@@ -4,6 +4,7 @@ import com.rajithk.rentcloud.model.Customer;
 import com.rajithk.rentcloud.profileservice.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class ProfileController {
      }
 
      @PostMapping(value = "/profile")
+     @PreAuthorize(value = "hasAnyAuthority('create_profile')")
      public Customer save(@RequestBody Customer customer) {
           return customerService.save(customer);
      }
